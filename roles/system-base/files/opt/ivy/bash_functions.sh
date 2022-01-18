@@ -30,6 +30,8 @@ function set_ivy_tag() {
 }
 
 function get_cloud() {
+    # TODO: replace this with calls to cloud-init's metadata store
+
     # Discover the current cloud platform. Very rudimentary, could fail eventually, but since 'compute' is
     # Google's trademark word for their service, it's not likely that AWS suddenly has this value.
 
@@ -42,7 +44,7 @@ function get_cloud() {
     if echo "${META_TEST}" | grep "computeMetadata" 2>&1 > /dev/null; then
         echo -n "google"
         echo -n "google" > /var/lib/cloud_provider
-    elif curl -H 'Metadata:true' --retry 3 --silent --fail 'http://169.254.169.254/metadata/instance/compute?api-version=2019-06-01' || false; then
+    elif curl -H 'Metadata:true' --retry 3 --silent --fail 'http://169.254.169.254/metadata/instance/compute?api-version=2019-06-01' > /dev/null 2>&1 || false; then
         echo -n "azure"
         echo -n "azure" > /var/lib/cloud_provider
     else
