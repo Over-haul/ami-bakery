@@ -55,8 +55,8 @@ fi
 
 yq e -i ".clusterDomain = \"${CLUSTER_DOMAIN}\"" "${KUBELET_KUBECONFIG}"
 
-for dns in "${CLUSTER_DNS[@]}"; do
-  yq e -i ".clusterDNS += \"${dns}\"" "${KUBELET_KUBECONFIG}"
+for i in "${!CLUSTER_DNS[@]}"; do
+  yq e -i ".clusterDNS[${i}] = \"${CLUSTER_DNS[${i}]}\"" "${KUBELET_KUBECONFIG}"
 done
 
 yq e -i ".providerID = \"${PROVIDER_ID}\"" "${KUBELET_KUBECONFIG}"
