@@ -33,7 +33,6 @@ ExecStart=/usr/bin/kube-apiserver \
     --etcd-servers=https://${ENDPOINT}:2379 \
     --goaway-chance=${GOAWAY_CHANCE} \
     --secure-port=443 \
-    --insecure-port=0 \
     --client-ca-file=${KUBE_CA} \
     --service-account-issuer=https://${ENDPOINT}:443 \
     --service-account-key-file=${SERVICE_ACCOUNT_PUB} \
