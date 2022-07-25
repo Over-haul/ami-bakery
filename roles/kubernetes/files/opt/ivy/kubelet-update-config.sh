@@ -10,9 +10,9 @@ PADDING=$(printf %-${#THIS_SCRIPT}s " ")
 function usage () {
   echo "Usage:"
   echo "${THIS_SCRIPT} -c,--config <kubelet config file to update, default: /etc/kubernetes/kubelet/config.yaml>"
-  echo "${PADDING} --cluster-domain <clusterDomain is the DNS domain for this cluster>"
-  echo "${PADDING} --cluster-dns <clusterDNS IP addresses for the cluster DNS server, repeat this parameter per IP>"
-  echo "${PADDING} --provider-id <providerID, if set, sets the unique ID of the instance that an external provider (i.e. cloudprovider) can use to identify a specific node>"
+  echo "${PADDING} --cluster-domain <clusterDomain is the DNS domain for this cluster. REQUIRED>"
+  echo "${PADDING} --cluster-dns <clusterDNS IP addresses for the cluster DNS server, repeat this parameter per IP. REQUIRED>"
+  echo "${PADDING} --provider-id <providerID, if set, sets the unique ID of the instance that an external provider (i.e. cloudprovider) can use to identify a specific node. REQUIRED>"
   echo
   echo "Update kubelet config file"
   exit
