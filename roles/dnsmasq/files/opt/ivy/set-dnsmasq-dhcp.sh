@@ -38,12 +38,21 @@ function update_dnsmasq_conf() {
   sed -i "${QUERY}" /etc/dnsmasq.d/10-dnsmasq
 }
 
-DNS="$(grep 'domain-name-servers' \
-        "/var/lib/dhclient/dhclient--$(get_default_interface).lease" \
-          | head -1 \
-          | awk '{len=split($3,a,","); gsub(";","",a[len]); print a[len];}')"
+function get_dns_server() {
+  local DNS
+  DNS="$(grep 'domain-name-servers' \
+          "/var/lib/dhclient/dhclient--$(get_default_interface).lease" \
+            | head -1 \
+            | awk '{len=split($3,a,","); gsub(";","",a[len]); print a[len];}')"
 
-update_dnsmasq_conf '%%DHCP_DNS%%' "${DNS}"
+  if [[ "$(get_cloud)" == 'aws' ]]; then
+    DNS='169.254.169.253'
+  fi
+  echo "${DNS}"
+}
+
+
+update_dnsmasq_conf '%%DHCP_DNS%%' "$(get_dns_server)"
 
 if [[ "${COREDNS}" != 'none' ]]; then
   update_dnsmasq_conf '^#server=' 'server='
