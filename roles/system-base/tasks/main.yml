@@ -179,6 +179,9 @@
     append: yes
     groups: systemd-journal
 
+- name: install datadog <-> redpanda integration
+  shell: "sudo -u dd-agent datadog-agent integration install -t datadog-redpanda=={{ dd_redpanda_version }}"
+
 - name: Check that /.dockerenv exists
   stat:
     path: /.dockerenv
