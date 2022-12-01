@@ -1,5 +1,6 @@
 ---
 dd_version: "7.33.1"
+dd_redpanda_version: "1.1.0"
 # Minimum version of the kernel package that should be installed by this role
 kernel_min: "5.15"
 yq_version: "4.16.1"
