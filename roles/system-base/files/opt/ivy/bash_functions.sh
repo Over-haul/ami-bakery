@@ -110,9 +110,11 @@ function get_capped_ram_mb_by_percent() {
 
 function set_datadog_key() {
   local DD_API_KEY="${1}"
-  local DD_CONFIG_FILE="${2:-/etc/datadog-agent/datadog.yaml}"
+  local DD_SITE="${2:-datadoghq.com}"
+  local DD_CONFIG_FILE="${3:-/etc/datadog-agent/datadog.yaml}"
   cat <<EOF > "${DD_CONFIG_FILE}"
 api_key: ${DD_API_KEY}
+site: ${DD_SITE}
 bind_host: 0.0.0.0
 EOF
 }
