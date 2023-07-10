@@ -50,6 +50,7 @@ function show_help() {
 }
 
 function clearsnapshot() {
+  # shellcheck disable=SC2317
   nodetool clearsnapshot -t "${SNAP_NAME}"
 }
 
