@@ -71,7 +71,7 @@
 - debug:
     msg: "{{ validate_nvidia_host.stdout }}"
 - name: "validate docker driver"
-  shell: "docker run --rm --gpus all nvidia/cuda:11.6.0-runtime-centos7 nvidia-smi"
+  shell: "docker run --rm --gpus all nvidia/cuda:11.6.2-runtime-centos7 nvidia-smi"
   register: validate_nvidia_docker
 - debug:
     msg: "{{ validate_nvidia_docker.stdout }}"
