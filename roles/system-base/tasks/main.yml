@@ -194,8 +194,12 @@
   when: not dockerenv.stat.exists
 
 - name: install datadog <-> redpanda integration
-  shell: "sudo -u dd-agent datadog-agent integration install -t datadog-redpanda=={{ dd_redpanda_version }}"
   when: not dockerenv.stat.exists
+  shell: |
+    curl -sL \
+      https://dd-integrations-core-wheels-build-stable.datadoghq.com/targets/simple/datadog-redpanda/datadog_redpanda-{{ dd_redpanda_version}}-py2.py3-none-any.whl \
+      -o /tmp/datadog_redpanda-{{ dd_redpanda_version}}-py2.py3-none-any.whl
+    sudo -u dd-agent datadog-agent integration install -w /tmp/datadog_redpanda-{{ dd_redpanda_version}}-py2.py3-none-any.whl
 
 - name: install development tools
   package:
